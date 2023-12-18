@@ -1,0 +1,20 @@
+{
+  "name": "player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+"scripts": {
+  "build": "tsc",
+  "start": "npm run build && npm run serve",
+  "serve": "live-server"
+},
+
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.3",
+    "live-server": "^1.2.2",
+    "typescript": "^5.3.2"
+  }
+}

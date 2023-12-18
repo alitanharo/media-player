@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #0d0d0d;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #christmas-message {
+      position: absolute;
+      top: 30%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      font-family: 'Pacifico', cursive; /* Change to a Christmas-themed font */
+      font-size: 4em;
+      color: #ff5757; /* Christmas red */
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards, bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snowfall"></canvas>
+  <div id="christmas-message">Merry Christmas Dise!</div>
+
+  <script>
+    // Snowfall Animation (unchanged)
+    (function() {
+      const canvas = document.getElementById('snowfall');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const snowflakes = [];
+
+      function createSnowflake() {
+        return {
+          x: Math.random() * canvas.width,
+          y: 0,
+          size: Math.random() * 5 + 2,
+          speed: Math.random() * 3 + 1,
+          opacity: Math.random(),
+        };
+      }
+
+      function drawSnowflake(flake) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
+        ctx.beginPath();
+        ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function updateSnowflakes() {
+        for (let i = 0; i < snowflakes.length; i++) {
+          const flake = snowflakes[i];
+          flake.y += flake.speed;
+          if (flake.y > canvas.height) {
+            snowflakes[i] = createSnowflake();
+          }
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        snowflakes.forEach(drawSnowflake);
+      }
+
+      function animate() {
+        updateSnowflakes();
+        draw();
+        requestAnimationFrame(animate);
+      }
+
+      for (let i = 0; i < 100; i++) {
+        snowflakes.push(createSnowflake());
+      }
+
+      animate();
+    })();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Visual Studio Code
+.vscode/
+
+# Build output
+dist/
+
+# Dependency directories
+/types/
+
+# npm package files
+package-lock.json
